@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/Hirocloud/mcp-go/server/queues"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
@@ -18,13 +19,51 @@ import (
 
 // sseSession represents an active SSE connection.
 type sseSession struct {
-	writer              http.ResponseWriter
-	flusher             http.Flusher
 	done                chan struct{}
 	eventQueue          chan string // Channel for queuing events
 	sessionID           string
 	notificationChannel chan mcp.JSONRPCNotification
 	initialized         atomic.Bool
+}
+
+func (s *sseSession) Context() context.Context {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (s *sseSession) QueueEvent() chan string {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (s *sseSession) Cancel() {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (s *sseSession) QueueNotificationEvent() queues.Queue[mcp.JSONRPCNotification] {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (s *sseSession) GetEvent() chan string {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (s *sseSession) IsDone() chan struct{} {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (s *sseSession) Done() {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (s *sseSession) IsLocal() bool {
+	//TODO implement me
+	panic("implement me")
 }
 
 // SSEContextFunc is a function that takes an existing context and the current
@@ -205,8 +244,6 @@ func (s *SSEServer) handleSSE(w http.ResponseWriter, r *http.Request) {
 
 	sessionID := uuid.New().String()
 	session := &sseSession{
-		writer:              w,
-		flusher:             flusher,
 		done:                make(chan struct{}),
 		eventQueue:          make(chan string, 100), // Buffer for events
 		sessionID:           sessionID,

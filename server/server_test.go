@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/Hirocloud/mcp-go/server/queues"
 	"testing"
 	"time"
 
@@ -1167,6 +1168,46 @@ type fakeSession struct {
 	sessionID           string
 	notificationChannel chan mcp.JSONRPCNotification
 	initialized         bool
+}
+
+func (f fakeSession) QueueEvent() chan string {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (f fakeSession) Cancel() {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (f fakeSession) Context() context.Context {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (f fakeSession) QueueNotificationEvent() queues.Queue[mcp.JSONRPCNotification] {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (f fakeSession) GetEvent() chan string {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (f fakeSession) IsDone() chan struct{} {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (f fakeSession) Done() {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (f fakeSession) IsLocal() bool {
+	//TODO implement me
+	panic("implement me")
 }
 
 func (f fakeSession) SessionID() string {
